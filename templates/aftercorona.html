@@ -1,0 +1,51 @@
+<html>
+<head>
+    <style>
+        body{
+            background-image: url('../static/images/pexels-nataliya-vaitkevich-5863388.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-top: 2%;
+            padding-bottom: 2px;
+        }
+        div{
+            background: rgba(0, 0, 0, 0.436);
+            font-style: italic;
+            color: azure;
+            margin-left: 30%;
+            margin-right: 30%;
+            border-radius: 2%;
+            padding-bottom: .01%;
+            padding-top: .001%;
+
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 style="font-size: 300%; color: rgb(0, 0, 0); "  >Covid Information:   </h1> <br> <br> <br>
+        <div>
+            
+            {% for z,y in  x['data'].items():  %}
+                {%if y!=None : %}
+                <h2>{{z}}  ------>    {{y}}</h2> 
+                {% endif %}
+            {% endfor %}
+            <br> <br>
+            <h1 style="color: rgb(236, 252, 17);">Please Take The Vaccines Available Near You(All Vaccines Are Safe And tested)</h1>
+            <h2 style="color: gold;">Obey Govt guidelines(Wear Mask And Follow Social Distancing)</h2>
+        </div>
+        <br> <br>
+        <h1 style=" color: rgb(63, 12, 78);">Covid News</h1><br>
+        
+           
+                <h2>{{title}}</h2> 
+                <h3>{{content}}</h3> <br>
+                <h6> {{pubDate}} </h6> <br>
+                <link rel="stylesheet" href="{{link}}"> <br>
+                <img src="{{e}}" alt=""> <br> <br> 
+ 
+    </center>   
+</body>
+
+</html>

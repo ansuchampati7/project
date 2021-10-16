@@ -1,0 +1,37 @@
+<html>
+<head>
+    <style>
+        body{
+            background-image: url('../static/images/pexels-sebastian-voortman-165505.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-top: 2%;
+            padding-bottom: 2px;
+        }
+        div{
+            background: rgba(0, 0, 0, 0.436);
+            font-style: italic;
+            color: azure;
+            margin-left: 30%;
+            margin-right: 30%;
+            border-radius: 2%;
+            padding-bottom: .01%;
+            padding-top: .001%;
+
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 style="font-size: 300%; color: rgb(7, 70, 112); "  >Weather Details:  <img src=https://openweathermap.org/img/w/{{z}}.png alt="">  </h1> <br> <br> <br>
+        <div>
+            {{msg}}
+            {% for x,y in d.items() %}
+            <h2>{{x}}  ------>    {{y}}</h2> 
+            {% endfor %}
+        </div>
+        
+    </center>   
+</body>
+
+</html>

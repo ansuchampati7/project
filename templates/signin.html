@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>
+           irene pragma-"online shopping platform"
+        </title>
+        <style>
+            body{
+
+                
+                background-image: url('../static/images/pexels(sign).jpg ');
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin-top: 5%;
+                padding-top: 10%;  
+                padding-bottom: 7%;
+                font-weight: 450;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+            div{
+                border: solid 2px;
+                background:rgba(255,255,255,.5);
+                height: 70%;
+                width: 40%;
+                margin-left: 30%;
+                border-radius: 5%;
+            }
+            label{
+                font-size: 20px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+                color:  rgb(46, 94, 131) ; 
+            }
+            .inp{
+                height: 25px;
+                width: 100px ;
+            }
+            .inp2{
+                height: 15px;
+                width: 15px;
+            }
+            input{
+                border-radius: 5px;
+            }
+            
+            h1{
+                color: rgb(34, 192, 231);
+            }
+            .qw{
+                margin-top: -5%;
+            }
+        </style>
+    </head>
+    <center><h1 class="qw">{{msg}}</h1></center>
+    <center><h1>sign in:</h1></center>
+    <body>
+        <div>
+            <center>
+                <form method="POST" action="/signin/aftersignin/">
+                    <label for="username">enter your username </label> <br>
+                    <input type="text" name="username" placeholder="username" required> <br><br>
+                    <label for="email">enter your email </label> <br> 
+                    <input type="email" name= "email" placeholder="enter your email" required> <br> <br>
+                    <label for="password">enter your password </label> <br>
+                    <input type="password" name = "password" placeholder="enter your password" required> <br> <br>
+                    <label for="gender">select your gender </label>
+                    <input class="inp2" type="radio" required name = "gender" > <label > Male </label> <input class="inp2" type="radio" name="gender" required> <label for="text"> Female </label> <br> <br>
+                    <input class="inp" type="submit">
+                </form>
+            </div>
+        </center>
+    </body>
+</html>
