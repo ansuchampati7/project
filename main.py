@@ -1,14 +1,22 @@
 from logging import debug
+from os import name
 from flask import Flask , redirect , url_for
 from flask import request , session
 from flask.templating import render_template
 from flask.helpers import make_response
 import pymysql as sql
 import requests
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import ssl
+from getpass import getpass
 
 
 
 app = Flask(__name__)
+
+name,em,pas = "","",""
 
 def database():
     db = sql.connect(host= "localhost" , port = 3306 , user = "root" , password = "" , database = "project")
@@ -31,6 +39,8 @@ def lpage():
 
 @app.route("/signin/aftersignin/", methods = ['GET', 'POST'] )
 def apage():
+    global name,em,pas
+
     if request.method == 'GET' :
         return redirect(url_for("signin.html"))
     else :
@@ -45,11 +55,50 @@ def apage():
             msg = "you have already registered please go to login page"
             return render_template("signin.html", msg = msg)
         else:
-            cmd = f"insert into flaskproject values('{name}' , '{em}' , '{pas}')"
-            cursor.execute(cmd)
-            db.commit()
-            msg = 'you are registed successfully check your email for verification'    
-            return render_template("signin.html", msg = msg)
+            msg = MIMEMultipart()
+            msg['from'] = "www.ansuman666@gmail.com"
+            msg['to'] = em
+            msg['subject'] = "verification link"
+
+            plain = """
+            <html>
+            <body>
+            <h1> hello ...... plz click on the link bellow for verification </h1> 
+            <a href = "localhost/verification/"> Click Here </a>
+            <img src = 'https://www.wallpaperbetter.com/wallpaper/519/942/401/good-morning-coffee-cup-720P-wallpaper.jpg'>
+            </body>
+            </html>
+
+            """
+            
+            p = MIMEText(plain , "html")
+            msg.attach(p)
+
+            host = "smtp.gmail.com"
+            port = 465
+            try:
+                with smtplib.SMTP_SSL(host,port, context = ssl.create_default_context()) as server:
+                    passwd = getpass("password nigga--->")
+                    server.login(msg['from'], passwd)
+                    server.sendmail(msg['from'],msg['to'], msg.as_string())
+            except Exception as error :
+                msg = "There is an error plz try again"
+                return render_template("signin.html", msg = msg)
+            else :
+                msg="msg has been sent plz check ur email"
+                return render_template("signin.html", msg = msg)
+
+
+@app.route("/verification/")
+def verify():
+    global name,em,pas
+    db , cursor = database()
+    cmd = f"insert into flaskproject values('{name}' , '{em}' , '{pas}')"
+    cursor.execute(cmd)
+    db.commit()
+    msg = 'you have registed successfully plz close this tab and go to the login page '    
+    return render_template("signin.html", msg = msg)
+
 
 @app.route("/login/")
 def spage():
